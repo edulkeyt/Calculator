@@ -1,0 +1,45 @@
+<div class="content edit-form">
+  <form #calculationForm="ngForm" autocomplete="off" (ngSubmit)="onCalculatePressed()">
+    <div class='row form-area'>
+      <div class='col-lg-3'></div>
+      <div class='col-lg-6'>
+        <div class="form-row">
+
+          <div class='col-lg-3 operand form-field'>
+            <div [ngClass]="{'has-error': showErrors && !leftOperand.valid}">
+              <input class='form-control' type='number' [(ngModel)]="model.leftOperand" name="leftOperand" #leftOperand="ngModel" maxlength="16"
+                required placeholder="Enter value" />
+              <span class='error-message'>Field should have numeric format</span>
+            </div>           
+          </div>
+
+          <div class='col-lg-4'>
+            <div [ngClass]="{'has-error': showErrors && !operation.valid}">
+              <ng-select [(ngModel)]="model.operation" name="operation" #operation="ngModel" [items]="options" bindLabel="Name"
+                bindValue="Id" (change)="onOperationSelected()" required placeholder="Choose operation"></ng-select>
+            </div>
+          </div>
+
+          <div class='col-lg-3 operand'>
+            <div [ngClass]="{'has-error': showErrors && !rightOperand.valid}">
+              <input class='form-control' type='number' [(ngModel)]="model.rightOperand" name="rightOperand" #rightOperand="ngModel"
+                maxlength="16" required placeholder="Enter value" />
+              <span class='error-message'>Field should have numeric format</span>
+            </div>
+          </div>
+
+          <div class='col-lg-2'>
+            <button class='btn btn-primary' type='submit'>Calculate</button>
+          </div>
+
+        </div>
+        <div >
+          <label for='result'>Result: </label>
+          <span id='result'>{{calculationResult}}</span>
+        </div>
+
+      </div>
+      <div class='col-lg-3'></div>
+    </div>
+  </form>
+</div>
